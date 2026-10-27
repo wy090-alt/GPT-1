@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f6ee">
+  <meta name="description" content="带着小鸡毛穿过草地、晚霞与星夜，收集金币，奔向在终点等你的小白。一款暖乎乎的横版小狗闯关游戏。">
+  <title>小狗大冒险 · 奔向小白</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+  <symbol id="i-paw" viewBox="0 0 24 24"><path d="M7.3 13.8c-1.9 2-3.2 3.8-2.1 5.3 1.3 1.9 3.8.1 6.8.1s5.5 1.8 6.8-.1c1.1-1.5-.2-3.3-2.1-5.3-2.7-3-6.7-3-9.4 0Z" fill="currentColor"/><ellipse cx="4.6" cy="10" rx="2.4" ry="3.2" fill="currentColor" transform="rotate(-25 4.6 10)"/><ellipse cx="9.3" cy="5.9" rx="2.3" ry="3" fill="currentColor"/><ellipse cx="14.9" cy="5.9" rx="2.3" ry="3" fill="currentColor"/><ellipse cx="19.5" cy="10" rx="2.4" ry="3.2" fill="currentColor" transform="rotate(25 19.5 10)"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="m11 5-5 4H3v6h3l5 4V5Z"/><path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1.7 7.2M4 4v6h6"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.7 2.2c-1 .6-1.2 1-1.2 2.3M12 17h.01"/></symbol>
+</defs></svg>
+<main class="app">
+  <header class="header">
+    <a class="brand" href="./" aria-label="小狗大冒险首页"><span class="brand-mark"><svg><use href="#i-paw"/></svg></span><span>小狗大冒险<small>LINE PUPPY ADVENTURE</small></span></a>
+    <div class="header-note"><span></span> 今天也是适合冒险的好日子</div>
+    <div class="header-actions"><button id="galleryBtn" class="help-button"><svg><use href="#i-paw"/></svg><span>小狗图鉴</span></button><button id="helpBtn" class="help-button"><svg><use href="#i-help"/></svg><span>怎么玩</span></button><span class="divider"></span><button id="soundBtn" class="icon-button muted" title="开启声音" aria-label="开启声音" aria-pressed="false"><svg><use href="#i-sound"/></svg></button></div>
+  </header>
+
+  <section class="intro-heading"><div><div class="eyebrow"><span class="tiny-star">✳</span> 一场奔向你的冒险</div><h1>世界很大，<span>小白在等我。</span><svg class="heading-heart" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 32S3 22 5 12C7 3 18 6 20 12c3-7 14-8 16 0 2 9-16 20-16 20Z"/></svg></h1><p>和小鸡毛一起，把平凡的一天变成暖乎乎的大冒险。</p></div><div class="edition"><span>小鸡毛 × 小白</span><small>双倍可爱 · 快乐出发</small></div></section>
+
+  <section class="game-shell" aria-label="小狗大冒险游戏">
+    <div class="game-toolbar"><div class="world-label"><span class="live-dot"></span><span id="worldName">第一站 · 阳光草地</span></div><div class="level-dots" aria-label="关卡进度"><span class="active" data-dot="0"></span><i></i><span data-dot="1"></span><i></i><span data-dot="2"></span></div><div class="toolbar-right"><span class="best">最佳金币 <b id="bestScore">00</b></span><button id="restartBtn" class="small-icon" title="重新开始" aria-label="重新开始"><svg><use href="#i-reset"/></svg></button><button id="pauseBtn" class="small-icon" title="暂停游戏" aria-label="暂停游戏" disabled><svg><use href="#i-pause"/></svg></button></div></div>
+    <div class="game-stage" id="stage">
+      <canvas id="game" tabindex="0" aria-label="横版闯关：方向键移动，空格跳跃，可二段跳，P 暂停"></canvas>
+      <div class="hud"><div class="hearts" id="hearts" aria-label="剩余3颗爱心"><span>♥</span><span>♥</span><span>♥</span></div><div class="coin-hud"><span class="coin-icon">✦</span><span id="coinCount">00</span></div></div>
+      <div class="game-overlay" id="overlay">
+        <div class="start-tag" id="overlayTag">小狗的快乐，没有终点</div>
+        <h2 id="overlayTitle">小鸡毛，出发！<span class="title-spark">✦</span></h2>
+        <p id="overlayDesc">带上一点勇气，去见最想见的小白。</p>
+        <button id="mainBtn" class="primary-button"><svg><use href="#i-paw"/></svg><span>开始冒险</span><span class="button-arrow">→</span></button>
+        <div class="start-hint" id="startHint">按 <kbd>Space</kbd> 也可以出发 <span>·</span> 支持二段跳</div>
+      </div>
+      <div class="scene-note" id="sceneNote"><span>♡</span> 再远的路，也要一起走</div>
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      <div class="touch-controls" id="touchControls"><div><button data-control="left" aria-label="向左移动">←</button><button data-control="right" aria-label="向右移动">→</button></div><button data-control="jump" class="touch-jump" aria-label="跳跃">↑<small>跳跃</small></button></div>
+    </div>
+    <div class="game-bottom"><span class="game-tip"><svg><use href="#i-paw"/></svg><span id="tipText">小提示：连续按两次跳跃，可以跳得更高哦。</span></span><span class="journey"><span id="journeyPct">0</span>% <span>奔向小白</span><span class="journey-track"><i id="journeyBar"></i></span><span class="goal-heart">♡</span></span></div>
+  </section>
+
+  <section class="below-game" aria-label="操作说明与冒险路线"><div class="controls-guide"><span class="section-label">冒险小手册</span><div><span class="key-pair"><kbd>←</kbd><kbd>→</kbd><span>移动</span></span><span class="key-pair"><kbd class="space-key">Space</kbd><span>跳跃 / 二段跳</span></span><span class="key-pair"><kbd>P</kbd><span>暂停一下</span></span></div></div><div class="route-guide"><span class="section-label">沿途的风景</span><div><span class="route-stop active" data-route="0"><span>✿</span>阳光草地</span><span class="route-line">···</span><span class="route-stop" data-route="1"><span>☀</span>落日晚霞</span><span class="route-line">···</span><span class="route-stop" data-route="2"><span>☾</span>星光之约</span></div></div></section>
+  <footer><span>献给每一个心里住着小狗的人 <span class="footer-heart">♡</span></span><span>慢慢来，小白会等你。</span></footer>
+</main>
+<dialog id="helpDialog"><button id="closeHelp" class="dialog-close" aria-label="关闭说明">×</button><div class="dialog-paw"><svg><use href="#i-paw"/></svg></div><h2>冒险小手册</h2><p class="dialog-intro">目标很简单：带着小鸡毛，找到每一关的小白。</p><div class="help-row"><span>01</span><p><b>跑起来，跳起来</b>方向键或 A / D 移动，空格、W 或 ↑ 跳跃。空中再按一次就能二段跳。</p></div><div class="help-row"><span>02</span><p><b>收集沿途的小惊喜</b>收集金币，从下方顶问号砖获得奖励。从上方踩小蘑菇可以把它踩扁。</p></div><div class="help-row"><span>03</span><p><b>累了也可以休息</b>碰到小怪或掉进坑会少一颗爱心。中途的小旗是存档点，P / Esc 暂停。手机使用画面下方的方向与跳跃按钮。</p></div><div class="help-footer">三段旅程，一只等你的小白。出发吧！</div></dialog>
+<dialog id="galleryDialog" class="gallery-dialog" aria-labelledby="galleryTitle"><button id="closeGallery" class="dialog-close" aria-label="关闭小狗图鉴">×</button><div class="gallery-eyebrow">两个小家伙，满满的喜欢</div><h2 id="galleryTitle">小狗图鉴</h2><p class="dialog-intro">一起看看小鸡毛和小白的每一个可爱角度。</p><div id="galleryContent"></div><p class="gallery-sources">形象参考 Moonlab 贴图：<a href="https://store.line.me/stickershop/product/24856095/en" target="_blank" rel="noopener noreferrer">小鸡毛</a><span> / </span><a href="https://store.line.me/stickershop/product/24856130/en" target="_blank" rel="noopener noreferrer">小白</a></p></dialog>
+<script type="module" src="game.js?v=2"></script>
+</body>
+</html>
